@@ -5,12 +5,13 @@
         <meta name="robots" content="noindex, nofollow">
         <meta name="viewport" content="width=device-width, initial-scale=1 ">
         <meta name="description" content="page to display the data">
+        <script src="./KS/Script.js" type="text/javascript" defer></script>
         <title>Data Table</title>
     </head>
 
     <body>
         <!--2 div containers to diffrenciate between the two tables and display appropreateky-->
-     
+
             <h1>LIBRARY</h1>
             <!--this table is for the primary table book details-->
             <table border="1" width="100%">
@@ -19,9 +20,9 @@
                     <tr>
                         <th>Book Name</th>
                         <th>Author Name</th>
-                    
                         <th>Price</th>
                         <th>Publisher</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <!--table body-->
@@ -46,17 +47,19 @@
                             echo '<tr>
                             <td>' . $book['bookName'] . '</td>
                             <td>' . $book['authorName'] . '</td>
-                           
                             <td>' . $book['bookPrice'] . '</td>
                             <td>' . $book['publisherName'] . '</td>
+                            <td> 
+                                <a onclick="return confirmDelete()"
+                                href="Delete-Book.php?bookId=' . $book['bookId'] . '">
+                                DELETE </a>
+                            </td>
                             </tr>';
                         }
                         //close the connection
-                        $db= null;
+                        $db=null;
                     ?>
                 </tbody>
             </table>
-     
-
     </body>
 </html>
