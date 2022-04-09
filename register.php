@@ -14,6 +14,7 @@
                     <label for="password" class="col-2">Password:</label>
                     <input type="password" name="password" id="password" required
                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
+                    <img src="img/show.png" alt="Show/Hide" id="reveal-toggle" onclick="revealToggle()">
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="confirm" class="col-2">Confirm Password:</label>
@@ -21,7 +22,7 @@
                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
                 </fieldset>
                 <div class="offset-3">
-                    <button class="btn btn-primary">Register</button>
+                    <button class="btn btn-primary" onclick="return passwordCheck()">Register</button>
                 </div>
             </form>
         </main>
