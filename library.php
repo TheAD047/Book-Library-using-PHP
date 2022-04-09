@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>  
-        <meta charset="UTF-8">
-        <meta name="robots" content="noindex, nofollow">
-        <meta name="viewport" content="width=device-width, initial-scale=1 ">
-        <meta name="description" content="page to display the data">
-        <script src="./KS/Script.js" type="text/javascript" defer></script>
-        <title>Data Table</title>
-    </head>
+<?php
+    $title = "Library page";
 
-    <body>
+    require './Include/header.php';
+?>
         <!--2 div containers to diffrenciate between the two tables and display appropreateky-->
 
             <h1>LIBRARY</h1>
+            <?php
+                if(!empty($_SESSION['username'])) {
+                    echo '<a href="book-details.php">Add a book</a>';
+                }
+            ?>
             <!--this table is for the primary table book details-->
             <table border="1" width="100%">
                 <!--table head-->
@@ -22,12 +20,17 @@
                         <th>Author Name</th>
                         <th>Price</th>
                         <th>Publisher</th>
-                        <th>Action</th>
+                        <?php
+                            if(!empty($_SESSION['username'])){
+                                echo '<th> Actions </th>';
+                            }
+                        ?>
                     </tr>
                 </thead>
                 <!--table body-->
                 <tbody>
                     <?php
+                    try{
                         //open a new connection to the database
                         $db = new PDO('mysql:host=172.31.22.43;dbname=Arin200489790', 'Arin200489790', 'KRoifWqMoQ');
 
@@ -45,19 +48,33 @@
                         foreach($books as $book)
                         {
                             echo '<tr>
-                            <td>' . $book['bookName'] . '</td>
+                            <td>'; 
+                            if(!empty($_SESSION['username'])){
+                                echo '<a href="book-details.php?bookId=' . $book['bookId'] . '">' . $book['bookName'] . ' </a> ';
+                            }
+                            else{
+                                echo $book['bookName'];
+                            }
+                            echo '</td>
                             <td>' . $book['authorName'] . '</td>
                             <td>' . $book['bookPrice'] . '</td>
-                            <td>' . $book['publisherName'] . '</td>
-                            <td> 
-                                <a onclick="return confirmDelete()"
-                                href="Delete-Book.php?bookId=' . $book['bookId'] . '">
-                                DELETE </a>
-                            </td>
-                            </tr>';
+                            <td>' . $book['publisherName'] . '</td>';
+                            if(!empty($_SESSION['username'])){
+                                echo '<td> 
+                                    <a class = "btn btn-danger" 
+                                    onclick="return confirmDelete()"
+                                    href="Delete-Book.php?bookId=' . $book['bookId'] . '">
+                                    DELETE </a>
+                                </td>';
+                            }
+                            echo '</tr>';
                         }
                         //close the connection
                         $db=null;
+                    }
+                    catch (Exception $error){
+                        header('location:general-error.php');
+                    }
                     ?>
                 </tbody>
             </table>
