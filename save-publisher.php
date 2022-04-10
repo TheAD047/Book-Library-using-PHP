@@ -51,6 +51,7 @@
             $db = null;
 
             echo "Publisher Saved";
+            echo '<a href="publisher.php">Publisher List</a>';
             }
         }
         catch(Exception $error){

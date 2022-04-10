@@ -1,8 +1,11 @@
 <?php
+    require './Include/Authorization-check.php';
+
     $title = "publisher details form";
 
     require './Include/header.php';
 ?>
+        <!--This page is for adding a publisher thus requires authorization check-->
         <a href="library.php">View the list</a>
         <h1>Publisher Information</h1>
 

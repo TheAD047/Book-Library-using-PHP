@@ -3,7 +3,6 @@
 
     require './Include/header.php';
 ?>
-        <!--2 div containers to diffrenciate between the two tables and display appropreateky-->
 
             <h1>LIBRARY</h1>
             <?php
@@ -50,6 +49,7 @@
                             echo '<tr>
                             <td>'; 
                             if(!empty($_SESSION['username'])){
+                                //if logged in allow to edit
                                 echo '<a href="book-details.php?bookId=' . $book['bookId'] . '">' . $book['bookName'] . ' </a> ';
                             }
                             else{
@@ -60,6 +60,7 @@
                             <td>' . $book['bookPrice'] . '</td>
                             <td>' . $book['publisherName'] . '</td>';
                             if(!empty($_SESSION['username'])){
+                                //if logged in allow to delete
                                 echo '<td> 
                                     <a class = "btn btn-danger" 
                                     onclick="return confirmDelete()"

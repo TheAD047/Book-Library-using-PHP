@@ -1,8 +1,13 @@
 <?php
     require './Include/Authorization-check.php';
+
     $title = "Book-Details page";
+
     require './Include/header.php';
+
     try{
+        //this try block grabs existing movie data if we need to edit a record
+        //set all to null
         $bookName = null;
         $authorName = null;
         $price = null;
@@ -11,8 +16,11 @@
         
         if (isset($_GET['bookId'])){
             if (is_numeric($_GET['bookId'])){
+                //if the book ID passed exists and is a number
                 $bookId = $_GET['bookId'];
 
+                //Even if the ID does not exist null will be assigned to other variables 
+                //SQL wont allow to set a value to a primary key AUTO INCREMENT column
                 $db = new PDO('mysql:host=172.31.22.43;dbname=Arin200489790', 'Arin200489790', 'KRoifWqMoQ');
 
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -42,7 +50,7 @@
             <!--  one more heading added -->
             <h5>Please complete all fields</h5>
             <!-- by default method="get" if we do not use "post" -->
-            <form method="post" action="save-book-details.php">
+            <form method="post" action="save-book-details.php" enctype="multipart/form-data">
                 <fieldset>
                     <label for="bookName" >Book:</label>
                     <input name="bookName" id="bookName"  maxlength="100"  placeholder="book name" required value="<?php echo $bookName ?>"> 
@@ -54,6 +62,10 @@
                 <fieldset>
                     <label for="price">Price:</label>
                     <input name="price" id="price"  placeholder="price"  type="number"  min="0" required value="<?php echo $price ?>">
+                </fieldset>
+                <fieldset>
+                    <label for="image">Imange</label>
+                    <input name="image" id="image" type="file" accept=".png, .jpg">
                 </fieldset>
                 <fieldset>
                     <label for="publisherId" >Publisher:</label>
@@ -74,6 +86,7 @@
                             //echo '<option selected>--Select--</option>';
                             foreach($publishers as $publisher){ 
                                 if($publisher['publisherId'] == $publisherId){
+                                    //if we want to edit a record select its corresponding value
                                     echo '<option selected value= "'.$publisher['publisherId'].'">' .  $publisher['publisherName'] . '</option>';
                                 }
                                 else{

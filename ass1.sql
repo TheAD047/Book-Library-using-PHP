@@ -17,3 +17,6 @@ Create table books
 select * from publishers;
 
 select * from books;
+
+ALTER TABLE books
+  ADD COLUMN image VARCHAR(100);

@@ -3,7 +3,8 @@
         require './Include/header.php';
     ?>
         <main>
+            <!--Index page nothing special-->
         <h1> PHP Library</h1>
-        <p> COMP1006-Assignment 1</p>
+        <p> This website contains database for books </p>
     </body>
 </html>

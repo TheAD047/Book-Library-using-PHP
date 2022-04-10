@@ -1,15 +1,16 @@
 <?php
     $title = "Login page";
     require './Include/header.php';
+
 ?>
         <main class="container">
             <h1>Login</h1>
             <?php
                 if(empty($_GET['invalid'])){
-                    echo '<p> Please Enter credentials </p>';
+                    echo '<h2> Please Enter credentials </h2>';
                 }
                 else{
-                    echo '<p> Invalid credentials </p>';
+                    echo '<h2> Invalid credentials </h2>';
                 }
             ?>
             <form method="post" action="authenticate.php">
